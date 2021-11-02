@@ -51,10 +51,10 @@ describe('Property name converter', () => {
       undefObject: undefined,
       anArrayOfObjects: [{ aB: 'ab', aC: 'ac' }],
       anObject: {
-        A1: 'a_1',
-        A2: 'a_2',
+        A1: 'a1',
+        A2: 'a2',
         A3: {
-          B4: 'b_4',
+          B4: 'b4',
         },
       },
     });
@@ -68,9 +68,9 @@ describe('Property name converter', () => {
     expect(testToSnake.undef_object).toBeUndefined();
     expect(testToSnake.an_array_of_objects[0].a_b).toEqual('ab');
     expect(testToSnake.an_array_of_objects[0].a_c).toEqual('ac');
-    expect(testToSnake.an_object.a1).toEqual('a_1');
-    expect(testToSnake.an_object.a2).toEqual('a_2');
-    expect(testToSnake.an_object.a3.b4).toEqual('b_4');
+    expect(testToSnake.an_object.a1).toEqual('a1');
+    expect(testToSnake.an_object.a2).toEqual('a2');
+    expect(testToSnake.an_object.a3.b4).toEqual('b4');
   });
 
   it('converts to PascalCase from camelCase', () => {
@@ -237,14 +237,14 @@ describe('Regular expressions', () => {
     expect(toSnake('AbCdEFGh')).toEqual('ab_cd_e_f_gh');
     expect(toSnake('A')).toEqual('a');
     expect(toSnake('A1')).toEqual('a1');
-    expect(toSnake('a1')).toEqual('a_1');
-    expect(toSnake('a1c2d')).toEqual('a_1c_2d');
-    expect(toSnake('ab1c2D')).toEqual('ab_1c_2_d');
-    expect(toSnake('ab1c2d')).toEqual('ab_1c_2d');
-    expect(toSnake('ab25')).toEqual('ab_25');
+    expect(toSnake('a1')).toEqual('a1');
+    expect(toSnake('a1c2d')).toEqual('a1c2d');
+    expect(toSnake('ab1c2D')).toEqual('ab1c2_d');
+    expect(toSnake('ab1c2d')).toEqual('ab1c2d');
+    expect(toSnake('ab25')).toEqual('ab25');
     expect(toSnake('abcE25D50')).toEqual('abc_e25_d50');
-    expect(toSnake('abc25D50')).toEqual('abc_25_d50');
-    expect(toSnake('abc25A50')).toEqual('abc_25_a50');
+    expect(toSnake('abc25D50')).toEqual('abc25_d50');
+    expect(toSnake('abc25A50')).toEqual('abc25_a50');
   });
 });
 

@@ -58,11 +58,11 @@ export function toSnake(term: string): string {
   let circuitBreaker = 0;
 
   while (
-    (/([a-z])([0-9])/.exec(result)?.length || 0) > 2 &&
+    (/([a-z])/.exec(result)?.length || 0) > 2 &&
     circuitBreaker < 10
   ) {
     result = result.replace(
-      /([a-z])([0-9])/,
+      /([a-z])/,
       (_all, $1: string, $2: string) =>
         `${$1.toLowerCase()}_${$2.toLowerCase()}`,
     );
