@@ -12,6 +12,8 @@
 .yarn-integrity
 /.changelog.tmp.md
 /coverage
+/dist
+/lib
 /test-reports/
 build/Release
 coverage

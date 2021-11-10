@@ -43,6 +43,9 @@ describe('Property name converter', () => {
   });
 
   it('converts to snake_case', () => {
+
+  const date = new Date();
+
     const testToSnake = objectToSnake({
       helloWorld: 'helloWorld',
       aNumber: 5,
@@ -57,6 +60,7 @@ describe('Property name converter', () => {
           B4: 'b4',
         },
       },
+      aDate: date
     });
 
     expect('helloWorld' in testToSnake).toStrictEqual(false);
@@ -71,6 +75,7 @@ describe('Property name converter', () => {
     expect(testToSnake.an_object.a1).toEqual('a1');
     expect(testToSnake.an_object.a2).toEqual('a2');
     expect(testToSnake.an_object.a3.b4).toEqual('b4');
+    expect(testToSnake.a_date).toEqual(date);
   });
 
   it('converts to PascalCase from camelCase', () => {

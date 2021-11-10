@@ -1,3 +1,5 @@
+const isObject = (o: any) => o === Object(o) && !Array.isArray(o) && typeof o !== 'function';
+
 function convertObject<
   TInput extends object,
   TResult extends
@@ -5,8 +7,8 @@ function convertObject<
     | ObjectToSnake<TInput>
     | ObjectToPascal<TInput>,
 >(obj: TInput, keyConverter: (arg: string) => string): TResult {
-  if (obj === null || typeof obj === 'undefined' || typeof obj !== 'object') {
-    return obj;
+  if (obj === null || obj instanceof Date || typeof obj === 'undefined' || typeof obj !== 'object') {
+    return obj as any;
   }
 
   const out = {} as TResult;
@@ -27,7 +29,7 @@ function convertObject<
               >(item, keyConverter)
             : item,
         ) as unknown[])
-      : typeof v === 'object'
+      : isObject(v)
       ? convertObject<
           typeof v,
           TResult extends ObjectToCamel<TInput>
@@ -36,8 +38,9 @@ function convertObject<
             ? ObjectToPascal<typeof v>
             : ObjectToSnake<typeof v>
         >(v, keyConverter)
-      : (v as unknown);
+      : (v as any);
   }
+
   return out;
 }
 
