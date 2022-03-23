@@ -12,11 +12,21 @@ function convertObject<
   }
 
   const out = {} as TResult;
-  for (const [k, v] of Object.entries(obj)) {
-    // eslint-disable-next-line
-    // @ts-ignore
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    out[keyConverter(k)] = Array.isArray(v)
+
+
+  for (const [ k, v ] of Object.entries(obj)) {
+      if (v instanceof Blob) {
+        // eslint-disable-next-line
+        // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        out[ keyConverter(k) ] = v
+
+        return out;
+      }
+      // eslint-disable-next-line
+      // @ts-ignore
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      out[keyConverter(k)] = Array.isArray(v)
       ? (v.map(<ArrayItem extends object>(item: ArrayItem) =>
           typeof item === 'object'
             ? convertObject<
