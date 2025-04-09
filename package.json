@@ -1,5 +1,6 @@
 {
-  "name": "ts-case-convert",
+  "name": "@pushappy/ts-case-convert",
+  "version": "1.0.0",
   "description": "Typescript type-preserving conversion of objects between camelCase and snake_case",
   "repository": {
     "type": "git",
@@ -22,7 +23,11 @@
     "package": "npx projen package",
     "eslint": "npx projen eslint",
     "projen": "npx projen",
-    "start": "npx projen start"
+    "start": "npx projen start",
+    "ar-login": "npx google-artifactregistry-auth --credential-config=./.npmrc"
+  },
+  "publishConfig": {
+    "registry": "https://europe-west1-npm.pkg.dev/pushappy-1285/npm-registry/"
   },
   "author": {
     "name": "Ross Williams",
@@ -62,7 +67,6 @@
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
-  "version": "0.0.0",
   "jest": {
     "testMatch": [
       "**/__tests__/**/*.ts?(x)",
