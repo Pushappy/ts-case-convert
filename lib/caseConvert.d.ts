@@ -1,4 +1,4 @@
-export declare function toCamel(term: string): string;
+export declare function toCamel<T extends string>(term: T): ToCamel<T>;
 export declare function objectToCamel<T extends object>(obj: T): ObjectToCamel<T>;
 export declare function toSnake(term: string): string;
 export declare function objectToSnake<T extends object>(obj: T): ObjectToSnake<T>;

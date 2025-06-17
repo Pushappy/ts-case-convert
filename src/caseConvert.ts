@@ -57,9 +57,7 @@ function convertObject<
 const camelCache = new Map<string, string>();
 
 export function toCamel<T extends string>(term: T): ToCamel<T> {
-  console.log(`Converting to camel case: ${term}`);
   if (camelCache.has(term)) {
-    console.log(`Cache hit for term: ${term}`);
     return camelCache.get(term)! as ToCamel<T>;
   }
 
@@ -67,8 +65,8 @@ export function toCamel<T extends string>(term: T): ToCamel<T> {
     term.length === 1
       ? term.toLowerCase()
       : term
-        .replace(/^([A-Z])/, (m) => m[0].toLowerCase())
-        .replace(/_([a-z0-9])/g, (m) => m[1].toUpperCase())
+          .replace(/^([A-Z])/, (m) => m[0].toLowerCase())
+          .replace(/[_-]([a-z0-9])/g, (m) => m[1].toUpperCase())
   );
 
   camelCache.set(term, result);
