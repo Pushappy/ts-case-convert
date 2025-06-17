@@ -54,12 +54,25 @@ function convertObject<
   return out;
 }
 
-export function toCamel(term: string): string {
-  return term.length === 1
-    ? term.toLowerCase()
-    : term
+const camelCache = new Map<string, string>();
+
+export function toCamel<T extends string>(term: T): ToCamel<T> {
+  console.log(`Converting to camel case: ${term}`);
+  if (camelCache.has(term)) {
+    console.log(`Cache hit for term: ${term}`);
+    return camelCache.get(term)! as ToCamel<T>;
+  }
+
+  const result = (
+    term.length === 1
+      ? term.toLowerCase()
+      : term
         .replace(/^([A-Z])/, (m) => m[0].toLowerCase())
-        .replace(/_([a-z0-9])/g, (m) => m[1].toUpperCase());
+        .replace(/_([a-z0-9])/g, (m) => m[1].toUpperCase())
+  );
+
+  camelCache.set(term, result);
+  return result as ToCamel<T>;
 }
 
 export function objectToCamel<T extends object>(obj: T): ObjectToCamel<T> {
